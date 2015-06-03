@@ -1,0 +1,29 @@
+{
+    "button": [
+		{
+		    "name": "订单发货", 
+            "sub_button": [
+                {
+                    "type": "click", 
+                    "name": "在线订货", 
+                    "key": "ordercar"
+                }, 
+                {
+                    "type": "click", 
+                    "name": "订单查询", 
+                    "key": "getmain"
+                },
+				{
+                    "type": "click", 
+                    "name": "发货单查询", 
+                    "key": "outone"
+                },
+				{
+                    "type": "view", 
+                    "name": "联系我们", 
+                    "url": "http://www.baidu.com"
+                }
+            ]
+		}
+    ]
+}

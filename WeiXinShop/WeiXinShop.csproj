@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{854B21C2-6994-4DAB-8BED-18891AA62AA6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WeiXinShop</RootNamespace>
+    <AssemblyName>WeiXinShop</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="gyfunc, Version=1.0.2.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\gyfunc.dll</HintPath>
+    </Reference>
+    <Reference Include="GyRedis, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\GyRedis.dll</HintPath>
+    </Reference>
+    <Reference Include="Harbour.RedisSessionStateStore">
+      <HintPath>..\lib\Harbour.RedisSessionStateStore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=5.2.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\lib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\lib\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\lib\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\lib\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\lib\ServiceStack.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Default.aspx" />
+    <Content Include="Dw_BackMoney.aspx" />
+    <Content Include="BindWeixin.aspx" />
+    <Content Include="CSS\default.css" />
+    <Content Include="Dw_Dyeing.aspx" />
+    <Content Include="Dw_Dyeing_Sel.aspx" />
+    <Content Include="Dw_GetDetail.aspx" />
+    <Content Include="Dw_OutMany.aspx" />
+    <Content Include="Error.aspx" />
+    <Content Include="Dw_GetMain.aspx" />
+    <Content Include="Dw_AccBook.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Img\bomei.png" />
+    <Content Include="Img\Btn_Query.png" />
+    <Content Include="Img\Default\Promotion.png" />
+    <Content Include="Img\Default\shoppingcart.png" />
+    <Content Include="Img\bdwx.png" />
+    <Content Include="Img\BtnDel.png" />
+    <Content Include="Img\BtnDown.png" />
+    <Content Include="Img\BtnDown_Link.png" />
+    <Content Include="Img\BtnSave.png" />
+    <Content Include="Img\BtnUp.png" />
+    <Content Include="Img\BtnSearch.png" />
+    <Content Include="Img\BtnUp_Link.png" />
+    <Content Include="Img\Btn_Back.png" />
+    <Content Include="Img\Btn_Bind.PNG" />
+    <Content Include="Img\Btn_Change.png" />
+    <Content Include="Img\btn_close.png" />
+    <Content Include="Img\Btn_Replenishment.png" />
+    <Content Include="Img\Btn_ShopCar.png" />
+    <Content Include="Img\Current.png" />
+    <Content Include="Img\cy.png" />
+    <Content Include="Img\Default.png" />
+    <Content Include="Img\Default\06.png" />
+    <Content Include="Img\Default\AccBook.png" />
+    <Content Include="Img\Default\Background.png" />
+    <Content Include="Img\Default\BackMoney.png" />
+    <Content Include="Img\Default\Default.png" />
+    <Content Include="Img\Default\GetMain.png" />
+    <Content Include="Img\Default\OutOne.png" />
+    <Content Include="Img\Default\Replenishment.png" />
+    <Content Include="Img\diwei.png" />
+    <Content Include="Img\Default\dyeing.png" />
+    <Content Include="Img\erp.png" />
+    <Content Include="Img\error.png" />
+    <Content Include="Img\exit.png" />
+    <Content Include="Img\fys.png" />
+    <Content Include="Img\hailu.png" />
+    <Content Include="Img\haoxin.png" />
+    <Content Include="Img\Logo.png" />
+    <Content Include="Img\orderCar.png" />
+    <Content Include="Img\orderform.png" />
+    <Content Include="Img\PageLeft.png" />
+    <Content Include="Img\PageLeft1.png" />
+    <Content Include="Img\PageRight.png" />
+    <Content Include="Img\PageRight1.png" />
+    <Content Include="Img\PPTBox\css\lrtk.css" />
+    <Content Include="Img\PPTBox\images\01.png" />
+    <Content Include="Img\PPTBox\images\02.png" />
+    <Content Include="Img\PPTBox\js\pptBox.js" />
+    <Content Include="Img\Right.png" />
+    <Content Include="Img\runmin.png" />
+    <Content Include="Img\sanrong.png" />
+    <Content Include="Img\switch_off.png" />
+    <Content Include="Img\switch_off_1.png" />
+    <Content Include="Img\Top_Bg.png" />
+    <Content Include="Img\zhishang.png" />
+    <Content Include="JS\lazyload-min.js" />
+    <Content Include="JS\localsqlite.js" />
+    <Content Include="JS\My97DatePicker\calendar.js" />
+    <Content Include="JS\My97DatePicker\config.js" />
+    <Content Include="JS\My97DatePicker\lang\en.js" />
+    <Content Include="JS\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="JS\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="JS\My97DatePicker\My97DatePicker.htm" />
+    <Content Include="JS\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="JS\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="JS\My97DatePicker\skin\default\img.gif" />
+    <Content Include="JS\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="JS\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="JS\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="JS\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="JS\My97DatePicker\WdatePicker.js" />
+    <Content Include="JS\Shoping.js" />
+    <Content Include="Dw_OrderCar.aspx" />
+    <Content Include="Dw_OrderSave.aspx" />
+    <Content Include="Dw_OutOne.aspx" />
+    <Content Include="JS\touch.js" />
+    <Content Include="JS\WdatePicker.js" />
+    <Content Include="menu.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Message.txt" />
+    <Content Include="Pages.ascx" />
+    <Content Include="Replenishment.aspx" />
+    <Content Include="SendMessage.aspx" />
+    <Content Include="test.txt" />
+    <Content Include="User.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\ChangeHashtable.cs" />
+    <Compile Include="DAL\AES.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dw_BackMoney.aspx.cs">
+      <DependentUpon>Dw_BackMoney.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_BackMoney.aspx.designer.cs">
+      <DependentUpon>Dw_BackMoney.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="BindWeixin.aspx.cs">
+      <DependentUpon>BindWeixin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BindWeixin.aspx.designer.cs">
+      <DependentUpon>BindWeixin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Core\DES.cs" />
+    <Compile Include="Core\Goo_Type_Memo.cs" />
+    <Compile Include="Core\GyShop_Page.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Core\CreateID.cs" />
+    <Compile Include="Core\Reply.cs" />
+    <Compile Include="Core\Shoping.cs" />
+    <Compile Include="Core\SysVisitor.cs" />
+    <Compile Include="Core\Tools.cs" />
+    <Compile Include="Core\UserInfo.cs" />
+    <Compile Include="Core\WebSet.cs" />
+    <Compile Include="DAL\CustomerDAL.cs" />
+    <Compile Include="DAL\GoodsNoDAL.cs" />
+    <Compile Include="DAL\PageDAL.cs" />
+    <Compile Include="Dw_Dyeing.aspx.cs">
+      <DependentUpon>Dw_Dyeing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_Dyeing.aspx.designer.cs">
+      <DependentUpon>Dw_Dyeing.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dw_Dyeing_Sel.aspx.cs">
+      <DependentUpon>Dw_Dyeing_Sel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_Dyeing_Sel.aspx.designer.cs">
+      <DependentUpon>Dw_Dyeing_Sel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dw_GetDetail.aspx.cs">
+      <DependentUpon>Dw_GetDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_GetDetail.aspx.designer.cs">
+      <DependentUpon>Dw_GetDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dw_Goods_info.ashx.cs">
+      <DependentUpon>Dw_Goods_info.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Dw_OutMany.aspx.cs">
+      <DependentUpon>Dw_OutMany.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_OutMany.aspx.designer.cs">
+      <DependentUpon>Dw_OutMany.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dw_GetMain.aspx.cs">
+      <DependentUpon>Dw_GetMain.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_GetMain.aspx.designer.cs">
+      <DependentUpon>Dw_GetMain.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dw_AccBook.aspx.cs">
+      <DependentUpon>Dw_AccBook.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_AccBook.aspx.designer.cs">
+      <DependentUpon>Dw_AccBook.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CustomerModel.cs" />
+    <Compile Include="Model\GoodsNoModel.cs" />
+    <Compile Include="Model\PageInfo.cs" />
+    <Compile Include="Dw_OrderCar.aspx.cs">
+      <DependentUpon>Dw_OrderCar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_OrderCar.aspx.designer.cs">
+      <DependentUpon>Dw_OrderCar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dw_OrderSave.aspx.cs">
+      <DependentUpon>Dw_OrderSave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_OrderSave.aspx.designer.cs">
+      <DependentUpon>Dw_OrderSave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dw_OutOne.aspx.cs">
+      <DependentUpon>Dw_OutOne.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dw_OutOne.aspx.designer.cs">
+      <DependentUpon>Dw_OutOne.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages.ascx.cs">
+      <DependentUpon>Pages.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages.ascx.designer.cs">
+      <DependentUpon>Pages.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Replenishment.aspx.cs">
+      <DependentUpon>Replenishment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Replenishment.aspx.designer.cs">
+      <DependentUpon>Replenishment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SendMessage.ashx.cs">
+      <DependentUpon>SendMessage.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="SendMessage.aspx.cs">
+      <DependentUpon>SendMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SendMessage.aspx.designer.cs">
+      <DependentUpon>SendMessage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="User.aspx.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="User.aspx.designer.cs">
+      <DependentUpon>User.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WeixinPay_Notify.ashx.cs">
+      <DependentUpon>WeixinPay_Notify.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Wx_Sample.ashx.cs">
+      <DependentUpon>Wx_Sample.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
+    <Content Include="Wx_Sample.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Dw_Goods_info.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WeixinPay_Notify.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SendMessage.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>15009</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

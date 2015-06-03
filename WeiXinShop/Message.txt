@@ -1,0 +1,20 @@
+﻿{
+    "touser": "owF65jrL27XSMidPDSnsrcFAhOK8", 
+    "msgtype": "news", 
+    "news": {
+        "articles": [
+            {
+                "title": "", 
+                "description": "", 
+                "url": "", 
+                "picurl": ""
+            }, 
+            {
+                "title": "", 
+                "description": "", 
+                "url": "", 
+                "picurl": ""
+            }
+        ]
+    }
+}
