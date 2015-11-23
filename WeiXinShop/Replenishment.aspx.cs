@@ -48,7 +48,7 @@ namespace WeiXinShop
             string ls_SQL = @"select isnull((select ThumbnaiIimg from Goodsno_picture where Goo_code=goodsno.goo_code),'img/error.png')as ThumbnaiIimg,
                             goo_code,goo_no,specnum,Goo_Type,Goo_Mate,goo_name,0.00 as UserPrice,Spec,
                             Content,Goo_unit,getdetail_memo,0 as num,0 as piece,'' as lasttime,saleprice,'' as discount
-                            from goodsno where 1=1 and goo_mate<>'PR' and goo_code in 
+                            from goodsno where 1=1 and isnull(goo_mate,'')<>'PR' and goo_code in 
                             ( select goods_code 
                             from outone,outmany
                             where outone.out_no=outmany.out_no

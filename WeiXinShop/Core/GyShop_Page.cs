@@ -49,7 +49,7 @@ namespace WeiXinShop.Core
             string ls_CONN_STR = "";
             try
             {
-                ls_CONN_STR = ConfigurationManager.AppSettings["ConnectionString"].ToString();
+                //ls_CONN_STR = ConfigurationManager.AppSettings["ConnectionString"].ToString();
             }
             catch
             { }
@@ -125,6 +125,7 @@ namespace WeiXinShop.Core
             SysVisitor.Current.ConnSession = ls_Conn;
             SysVisitor.Current.DbType = "mssql";
             SysVisitor.Current.siteFirst = ls_Url;
+            SysVisitor.Current.DbPwd = ls_dbpass;
             SqlHelper.CONN_STR = ls_Conn;
 
         }

@@ -6,6 +6,7 @@
   <title></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <link href="CSS/default.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/js/comm.js?v=<%=data %>"></script>
 </head>
 <body style="background-color: #c5c5c5">
   <form id="form1" runat="server">

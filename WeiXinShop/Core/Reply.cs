@@ -33,7 +33,7 @@ namespace WeiXinShop.Core
                         #region 关注与取消关注
                         if (ls_Event.ToLower() == "subscribe")  //订阅
                         {
-                            try 
+                            try
                             {
                                 string ls_name = SysVisitor.Current.Get_User(Core.SysVisitor.Current.UserWeixinID);
                                 if (!string.IsNullOrEmpty(ls_name))
@@ -47,6 +47,10 @@ namespace WeiXinShop.Core
                                     if (ls_customer == "")
                                     {
                                         ls_haveerp = "N";
+                                    }
+                                    if (ls_name.Length > 30)
+                                    {
+                                        ls_name = ls_name.Substring(0, 30);
                                     }
                                     n_create_sql lnv_sql = new n_create_sql();
                                     lnv_sql.of_SetTable("wingroup_wx");
@@ -65,8 +69,8 @@ namespace WeiXinShop.Core
                                     }
                                 }
                             }
-                            catch {  }
-                            return SubscribeReply(); 
+                            catch { }
+                            return SubscribeReply();
                         }
                         if (ls_Event.ToLower() == "unsubscribe")  //取消订阅
                         {
@@ -195,7 +199,7 @@ namespace WeiXinShop.Core
             string ls_userid = Core.SysVisitor.Current.UserWeixinID;
             string ls_phone = "";
             ls_phone = SqlHelper.ExecuteScalar(@"select mobile from customer where weixinid=@weixinid", "@weixinid=" + ls_userid);
-            return TextXML("当前绑定的手机号为："+ls_phone);
+            return TextXML("当前绑定的手机号为：" + ls_phone);
         }
         /// <summary>
         /// 取消绑定
@@ -254,7 +258,16 @@ namespace WeiXinShop.Core
             {
                 ls_msg = "感谢您对" + SysVisitor.Current.WebName + "的关注！发送1获取菜单列表 ";
             }
-            ll_Item.Add(new newsItem(ls_msg + "请点击图片进行绑定", "微信绑定密码请向供应商获取", SysVisitor.Current.WebUrl + "/Img/bdwx.png", SysVisitor.Current.WebUrl + "/BindWeixin.aspx?UserKey=" + UserInfo.GetUserKey() + "&userweixinid=" + SysVisitor.Current.UserWeixinID));
+            if (!string.IsNullOrEmpty(publicfuns.of_GetMySysSet("weixin", "welcome")))
+            {
+                ls_msg = publicfuns.of_GetMySysSet("weixin", "welcome");
+            }
+            string ls_subscribe = publicfuns.of_GetMySysSet("weixin", "is_subscribe");
+            if (ls_subscribe == "N")//关注后是否推送绑定消息
+            {
+                return TextXML(ls_msg);
+            }
+            ll_Item.Add(new newsItem(ls_msg + " 请点击图片进行绑定", "微信绑定密码请向供应商获取", SysVisitor.Current.WebUrl + "/Img/bdwx.png", SysVisitor.Current.WebUrl + "/BindWeixin.aspx?UserKey=" + UserInfo.GetUserKey() + "&userweixinid=" + SysVisitor.Current.UserWeixinID));
 
             return newsXML(ll_Item.ToArray());
         }
@@ -409,13 +422,14 @@ namespace WeiXinShop.Core
             if (as_str != "")
             {
                 //转发至客服
-                String ls_Response = "<xml>";
-                ls_Response += "<ToUserName><![CDATA[" + Core.SysVisitor.Current.UserWeixinID + "]]></ToUserName>";
-                ls_Response += "<FromUserName><![CDATA[" + Core.SysVisitor.Current.WeixinID + "]]></FromUserName>";
-                ls_Response += "<CreateTime>" + DateTime.Now.Ticks.ToString() + "</CreateTime>";
-                ls_Response += "<MsgType><![CDATA[transfer_customer_service]]></MsgType>";
-                ls_Response += "</xml>";
-                return ls_Response;
+                System.Text.StringBuilder ls_Response = new System.Text.StringBuilder();
+                ls_Response.Append("<xml>");
+                ls_Response.Append("<ToUserName><![CDATA[" + Core.SysVisitor.Current.UserWeixinID + "]]></ToUserName>");
+                ls_Response.Append("<FromUserName><![CDATA[" + Core.SysVisitor.Current.WeixinID + "]]></FromUserName>");
+                ls_Response.Append("<CreateTime>" + DateTime.Now.Ticks.ToString() + "</CreateTime>");
+                ls_Response.Append("<MsgType><![CDATA[transfer_customer_service]]></MsgType>");
+                ls_Response.Append("</xml>");
+                return ls_Response.ToString();
             }
             return "";
         }
@@ -479,40 +493,42 @@ namespace WeiXinShop.Core
         /// </summary>
         private static String TextXML(String as_Text)
         {
-            String ls_Rel = "<xml>" +
-                "<ToUserName><![CDATA[" + Core.SysVisitor.Current.UserWeixinID + "]]></ToUserName>" +
-                "<FromUserName><![CDATA[" + Core.SysVisitor.Current.WeixinID + "]]></FromUserName>" +
-                "<CreateTime>" + DateTime.Now.Ticks.ToString() + "</CreateTime>" +
-                "<MsgType><![CDATA[text]]></MsgType>" +
-                "<Content><![CDATA[" + as_Text + "]]></Content>" +
-                "<FuncFlag>0</FuncFlag>" +
-                "</xml>";
-            return ls_Rel;
+            System.Text.StringBuilder ls_Rel = new System.Text.StringBuilder();
+            ls_Rel.Append("<xml>");
+            ls_Rel.Append("<ToUserName><![CDATA[" + Core.SysVisitor.Current.UserWeixinID + "]]></ToUserName>");
+            ls_Rel.Append("<FromUserName><![CDATA[" + Core.SysVisitor.Current.WeixinID + "]]></FromUserName>");
+            ls_Rel.Append("<CreateTime>" + DateTime.Now.Ticks.ToString() + "</CreateTime>");
+            ls_Rel.Append("<MsgType><![CDATA[text]]></MsgType>");
+            ls_Rel.Append("<Content><![CDATA[" + as_Text + "]]></Content>");
+            ls_Rel.Append("<FuncFlag>0</FuncFlag>");
+            ls_Rel.Append("</xml>");
+            return ls_Rel.ToString();
         }
         /// <summary>
         /// 主动推送图文信息模板
         /// </summary>
         private static String newsXML(newsItem[] a_Item)
         {
-            string ls_SubCom = "<xml>";
-            ls_SubCom += "<ToUserName><![CDATA[" + Core.SysVisitor.Current.UserWeixinID.Trim() + "]]></ToUserName>";
-            ls_SubCom += "<FromUserName><![CDATA[" + Core.SysVisitor.Current.WeixinID.Trim() + "]]></FromUserName>";
-            ls_SubCom += "<CreateTime>" + DateTime.Now.Ticks.ToString() + "</CreateTime>";
-            ls_SubCom += "<MsgType><![CDATA[news]]></MsgType>";
-            ls_SubCom += "<ArticleCount>" + a_Item.Length + "</ArticleCount>";
-            ls_SubCom += "<Articles>";
+            System.Text.StringBuilder ls_SubCom = new System.Text.StringBuilder();
+            ls_SubCom.Append("<xml>");
+            ls_SubCom.Append("<ToUserName><![CDATA[" + Core.SysVisitor.Current.UserWeixinID.Trim() + "]]></ToUserName>");
+            ls_SubCom.Append("<FromUserName><![CDATA[" + Core.SysVisitor.Current.WeixinID.Trim() + "]]></FromUserName>");
+            ls_SubCom.Append("<CreateTime>" + DateTime.Now.Ticks.ToString() + "</CreateTime>");
+            ls_SubCom.Append("<MsgType><![CDATA[news]]></MsgType>");
+            ls_SubCom.Append("<ArticleCount>" + a_Item.Length + "</ArticleCount>");
+            ls_SubCom.Append("<Articles>");
             foreach (newsItem For_Item in a_Item)
             {
-                ls_SubCom += "<item>";
-                ls_SubCom += "<Title><![CDATA[" + For_Item.Title + "]]></Title>";
-                ls_SubCom += "<Description><![CDATA[" + For_Item.Description + "]]></Description>";
-                ls_SubCom += "<PicUrl><![CDATA[" + For_Item.PicUrl + "]]></PicUrl>";
-                ls_SubCom += "<Url><![CDATA[" + For_Item.Url + "]]></Url>";
-                ls_SubCom += "</item>";
+                ls_SubCom.Append("<item>");
+                ls_SubCom.Append("<Title><![CDATA[" + For_Item.Title + "]]></Title>");
+                ls_SubCom.Append("<Description><![CDATA[" + For_Item.Description + "]]></Description>");
+                ls_SubCom.Append("<PicUrl><![CDATA[" + For_Item.PicUrl + "]]></PicUrl>");
+                ls_SubCom.Append("<Url><![CDATA[" + For_Item.Url + "]]></Url>");
+                ls_SubCom.Append("</item>");
             }
-            ls_SubCom += "</Articles>";
-            ls_SubCom += "</xml>";
-            return ls_SubCom;
+            ls_SubCom.Append("</Articles>");
+            ls_SubCom.Append("</xml>");
+            return ls_SubCom.ToString();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace WeiXinShop
             if (!IsPostBack)
             {
                 Lbl_PageIndex.Text = "1";
-                Txt_TimeBegin.Text = DateTime.Now.AddMonths(-1).ToString("yyyy-MM-01");
+                Txt_TimeBegin.Text = DateTime.Now.AddMonths(-3).ToString("yyyy-MM-01");
                 Txt_TimeEnd.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
                 of_bindGetmain();
             }
@@ -56,55 +56,68 @@ namespace WeiXinShop
             ll_Pa.Add(Pa1);
 
             #region 订单查询最小日期限制
-            DateTime ld_OrderBeginDate = DateTime.MinValue;
-            try
-            {
-                string ls_OrderBeginDate = publicfuns.of_GetMySysSet("商城参数" + WebSet.os_WebHost, "OrderBeginDate");
-                if (ls_OrderBeginDate != "")
-                {
-                    int li_OrderBeginDate = Convert.ToInt32(ls_OrderBeginDate);
-                    if (li_OrderBeginDate > 0)
-                    {
-                        Lbl_DateMessage.Text = "只能查询 " + li_OrderBeginDate + "天前的订单";
-                        ld_OrderBeginDate = DateTime.Now.AddDays(0 - li_OrderBeginDate);
-                    }
-                }
-            }
-            catch { }
+            //DateTime ld_OrderBeginDate = DateTime.MinValue;
+            //try
+            //{
+            //    string ls_OrderBeginDate = publicfuns.of_GetMySysSet("商城参数" + WebSet.os_WebHost, "OrderBeginDate");
+            //    if (ls_OrderBeginDate != "")
+            //    {
+            //        int li_OrderBeginDate = Convert.ToInt32(ls_OrderBeginDate);
+            //        if (li_OrderBeginDate > 0)
+            //        {
+            //            Lbl_DateMessage.Text = "只能查询 " + li_OrderBeginDate + "天前的订单";
+            //            ld_OrderBeginDate = DateTime.Now.AddDays(0 - li_OrderBeginDate);
+            //        }
+            //    }
+            //}
+            //catch { }
 
-            if (Txt_TimeBegin.Text.Trim() == "")
+            //if (Txt_TimeBegin.Text.Trim() == "")
+            //{
+            //    if (ld_OrderBeginDate <= DateTime.Now.AddMonths(-3))
+            //    {
+            //        ld_OrderBeginDate = DateTime.Now.AddMonths(-3);
+            //    }
+            //    Txt_TimeBegin.Text = ld_OrderBeginDate.ToString("yyyy-MM-dd");
+            //}
+            //else
+            //{
+            //    try
+            //    {
+            //        DateTime ld_Time = Convert.ToDateTime(Txt_TimeBegin.Text.Trim());
+            //        if (ld_Time >= ld_OrderBeginDate)
+            //        { ld_OrderBeginDate = ld_Time; }
+            //        else
+            //        {
+            //            ClientScript.RegisterClientScriptBlock(this.GetType(), "", "alert('请输入正确的开始时间')", true);
+            //            return;
+            //        }
+            //    }
+            //    catch
+            //    {
+            //        ClientScript.RegisterClientScriptBlock(this.GetType(), "", "alert('请输入正确的开始时间')", true);
+            //        return;
+            //    }
+            //}
+
+
+            //Page.StrWhere += " and getorderdate>=@begionTime ";
+            //ll_Pa.Add(new GysoftParameter("@begionTime", ld_OrderBeginDate));
+            #endregion
+            if (Txt_TimeBegin.Text.Trim() != "")
             {
-                if (ld_OrderBeginDate <= DateTime.Now.AddMonths(-3))
-                {
-                    ld_OrderBeginDate = DateTime.Now.AddMonths(-3);
-                }
-                Txt_TimeBegin.Text = ld_OrderBeginDate.ToString("yyyy-MM-dd");
-            }
-            else
-            {
+                DateTime ld_TimeEnd;
                 try
-                {
-                    DateTime ld_Time = Convert.ToDateTime(Txt_TimeBegin.Text.Trim());
-                    if (ld_Time >= ld_OrderBeginDate)
-                    { ld_OrderBeginDate = ld_Time; }
-                    else
-                    {
-                        ClientScript.RegisterClientScriptBlock(this.GetType(), "", "alert('请输入正确的开始时间')", true);
-                        return;
-                    }
-                }
+                { ld_TimeEnd = Convert.ToDateTime(Txt_TimeBegin.Text.Trim()); }
                 catch
                 {
                     ClientScript.RegisterClientScriptBlock(this.GetType(), "", "alert('请输入正确的开始时间')", true);
                     return;
                 }
+                Page.StrWhere += " and getorderdate>=@begionTime ";
+                GysoftParameter Pa = new GysoftParameter("@begionTime", ld_TimeEnd);
+                ll_Pa.Add(Pa);
             }
-
-
-            Page.StrWhere += " and getorderdate>=@begionTime ";
-            ll_Pa.Add(new GysoftParameter("@begionTime", ld_OrderBeginDate));
-            #endregion
-
             if (Txt_TimeEnd.Text.Trim() != "")
             {
                 DateTime ld_TimeEnd;

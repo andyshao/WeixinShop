@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using WeiXinShop.Core;
 using baseclass;
 using System.Data;
+using System.Configuration;
 
 namespace WeiXinShop
 {
@@ -21,6 +22,16 @@ namespace WeiXinShop
             {
                 if (!UserInfo.SureUserWinxin(SysVisitor.Current.UserWeixinID))
                 { Response.Redirect("Error.aspx"); }
+                string stopDB = publicfuns.of_GetMySysSet("weixin","StopAccBook"); //ConfigurationManager.AppSettings["StopAccBook"];
+                if (!string.IsNullOrEmpty(stopDB))
+                {
+                    if (stopDB=="Y")
+                    {
+                        Response.Write("<h1>该功能已停用，如有疑问请联系厂家</h1>");
+                        Response.End();
+                        return;
+                    }
+                }
             }
             as_CusCode = UserInfo.GetCus_code();
             if (!IsPostBack)

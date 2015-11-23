@@ -23,7 +23,7 @@ namespace WeiXinShop
             as_CusCode = UserInfo.GetCus_code();
             if (!IsPostBack)
             {
-                Txt_TimeBegin.Text = DateTime.Now.ToString("yyyy-MM-01");
+                Txt_TimeBegin.Text = DateTime.Now.AddMonths(-3).ToString("yyyy-MM-dd");
                 Txt_TimeEnd.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
                 of_bind();
             }

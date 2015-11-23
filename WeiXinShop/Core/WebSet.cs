@@ -129,10 +129,10 @@ namespace WeiXinShop.Core
             string ls_RelSQL = " and (goodtype.visible='y' or goodtype.visible is null) ";
 
             if ("N" != publicfuns.of_GetMySysSet("商城参数" + WebSet.os_WebHost, "ShowGood_GooType"))
-            { ls_RelSQL += " and goodsno.goo_type in (SELECT typeNo FROM goodtype WHERE isnull(visible,'Y')='Y' and isweb='Y') "; }
+            { ls_RelSQL += " and goodsno.goo_type in (SELECT typeNo FROM goodtype WHERE isnull(visible,'Y')='Y' and isweb='Y') \r\n"; }
 
             if ("N" != publicfuns.of_GetMySysSet("商城参数" + WebSet.os_WebHost, "ShowGood_GooMata"))
-            { ls_RelSQL += " and goodsno.goo_mate in (SELECT matecode FROM goodmate WHERE isweb='Y') "; }
+            { ls_RelSQL += " and (goodsno.goo_mate is null or goodsno.goo_mate in (SELECT matecode FROM goodmate WHERE isweb='Y') )  \r\n"; }
 
             string ls_WebGoodType = WebSet.WebGoodType();
             if (ls_WebGoodType != "")

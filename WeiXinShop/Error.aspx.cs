@@ -14,5 +14,7 @@ namespace WeiXinShop
         {
 
         }
+
+        public static string data { get { return DateTime.Now.Ticks.ToString(); } }
     }
 }

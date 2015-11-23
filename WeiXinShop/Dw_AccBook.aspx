@@ -44,12 +44,12 @@
                     mselectNode.appendChild(opt);
                 }
                 document.getElementById('Txt_TimeEnd').value = getBeforeDate(0);
-                document.getElementById('Txt_TimeBegin').value = getBeforeDate(30);
+                document.getElementById('Txt_TimeBegin').value = getBeforeDate(90);
             }
             function changeForm(value) {
                 if (value == "") {
                     document.getElementById('Txt_TimeEnd').value = getBeforeDate(0);
-                    document.getElementById('Txt_TimeBegin').value = getBeforeDate(30);
+                    document.getElementById('Txt_TimeBegin').value = getBeforeDate(90);
                 }
                 else {
                     var date = new Date(value);

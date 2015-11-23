@@ -22,7 +22,7 @@ namespace WeiXinShop.Core
             if (ls_Memo.Trim() != "" && ls_Pic.Trim() != "")
             { return; }
             string strSql = "select memo,picturename from goodsno_type_memo where goo_type='" +
-                      as_TypeNo + "' and goo_mate='" + as_MateCode + "'";
+                      as_TypeNo + "' and isnull(goo_mate,'')='" + as_MateCode + "'";
             DataTable dt = SqlHelper.ExecuteDataTable(strSql);
             if (dt.Rows.Count == 0)
             {

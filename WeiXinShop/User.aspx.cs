@@ -35,7 +35,7 @@ namespace WeiXinShop
                 string text = Server.UrlDecode(Request.Form["text"].ToString());
                 text = HttpUtility.UrlDecode(text, Encoding.GetEncoding("UTF-8"));
 
-                string str = SureSaleInfo(user, passwd, code);//SaleInfo.SureSaleInfo(user, passwd);
+                string str = SureSaleInfo(user, passwd, as_Code);//SaleInfo.SureSaleInfo(user, passwd);
 
                 #region 保存产品图文详情
                 if (str == "OK" && Edit == "false" || Edit == "true")
@@ -86,7 +86,7 @@ namespace WeiXinShop
                     if (li_Rel > 0)
                     { Response.Write("OK"); }
                     else
-                    { Response.Write("Error"); }
+                    { Response.Write("Error;可能标题重复"); }
                     return;
                 }
                 if (str == "OK" && Edit == "DefaulePictrueDel")//删除首页轮播图
@@ -144,7 +144,7 @@ namespace WeiXinShop
             {
                 try
                 {
-                    askey = baseclass.DES.DecryString(askey, Key);
+                    askey = baseclass.DES.of_DecryStrVc(askey, Key);
                 }
                 catch
                 {
@@ -182,7 +182,7 @@ namespace WeiXinShop
                         string ls_sql = @"select goodsno.goo_name,goodsno.goo_code,goodsno.goo_no 
                                         from goodsno,goodmate,goodtype 
                                         where 1=1 
-                                        and goo_type=typeno and goo_mate=matecode and goodsno.Goodfunc in ('C','X') 
+                                        and goo_type=typeno and goo_mate*=matecode and goodsno.Goodfunc in ('C','X') 
                                         and goodtype.isweb='Y' and goodmate.isweb='Y' and goodsno.isweb='Y'";
                         n_findby_dw lnv_sql = new n_findby_dw();
                         lnv_sql.of_setSQL(ls_sql);
@@ -229,7 +229,7 @@ namespace WeiXinShop
                                     for (int i = 0; i < ls_count; i++)
                                     {
                                         RandKey = ran.Next(1000, 9999);
-                                        string WeixinPwd = baseclass.DES.EncryString(RandKey.ToString(), ls_DESKey);
+                                        string WeixinPwd = baseclass.DES.of_EncryStrVc(RandKey.ToString(), ls_DESKey);
                                         string ls_Sql = "set rowcount 1 update customer set WeixinPwd=@WeixinPwd where WeixinPwd is null";
                                         GysoftParameter[] Pa = { new GysoftParameter("@WeixinPwd", WeixinPwd) };
                                         SqlHelper.ExecuteNonQuery(ls_Sql, Pa);
@@ -281,7 +281,7 @@ namespace WeiXinShop
 
                     #endregion
                     else
-                    { Response.Write("error"); return; }
+                    { Response.Write("error" + "key:" + Key + "  askey:" + askey); return; }
                 }
             }
             #endregion
@@ -303,11 +303,22 @@ namespace WeiXinShop
             try
             {
                 Key = as_code.Substring(0, 2) + baseclass.DES.of_Md5(as_code).Substring(0, 6);
-                as_pwd = baseclass.DES.DecryString(as_pwd, Key);
+                as_pwd = baseclass.DES.of_DecryStrVc(as_pwd, Key);
+                if (as_user == "sa")
+                {
+                    if (as_pwd == SysVisitor.Current.DbPwd)
+                    {
+                        return "OK";
+                    }
+                    else
+                    {
+                        return "管理员密码错误";
+                    }
+                }
                 string strSql = "select username,CanWebAdmin from myuser where username=@username and newpass=@newpass";
                 GysoftParameter[] Pa = { 
                    new GysoftParameter("@username",as_user),
-                   new GysoftParameter("@newpass",baseclass.DES.EncryString(as_pwd, ls_DESKey)) };
+                   new GysoftParameter("@newpass",baseclass.DES.of_EncryStrVc(as_pwd, ls_DESKey)) };
                 DataTable ldt_user = SqlHelper.ExecuteDataTable(CommandType.Text, strSql, Pa);
                 if (ldt_user == null)
                 {
@@ -315,7 +326,7 @@ namespace WeiXinShop
                     return "数据连接出错!";
                 }
                 if (ldt_user.Rows.Count == 0)
-                { return "用户名或密码错误!"; }
+                { return "用户名或密码错误!" + as_user + "  " + as_pwd; }
 
                 if (ldt_user.Rows[0]["CanWebAdmin"].ToString().ToUpper() != "Y")
                 {
@@ -339,16 +350,15 @@ namespace WeiXinShop
                 as_Key = value;
             }
         }
-        static string as_Code = "";
-        public static string code
+        public static string as_Code
         {
             get
             {
-                return GyRedis.GyRedis.Get("comkey");
+                return GyRedis.GyRedis.Get("comkey" + SysVisitor.Current.siteFirst);
             }
             set
             {
-                 GyRedis.GyRedis.Set("comkey", value, 3600 * 12);
+                GyRedis.GyRedis.Set("comkey" + SysVisitor.Current.siteFirst, value, 3600 * 12);
             }
         }
     }

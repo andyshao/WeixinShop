@@ -27,7 +27,7 @@ namespace WeiXinShop
             if (!IsPostBack)
             {
                 Lbl_PageIndex.Text = "1";
-                Txt_TimeBegin.Text = DateTime.Now.AddMonths(-1).ToString("yyyy-MM-01");
+                Txt_TimeBegin.Text = DateTime.Now.AddMonths(-3).ToString("yyyy-MM-01");
                 Txt_TimeEnd.Text = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd");
                 of_bindOutOne();
             }

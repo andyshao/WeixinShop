@@ -49,7 +49,7 @@ namespace WeiXinShop
                             goodsno.goo_code,goodsno.goo_no,goodsno.specnum,goodsno.Goo_Type,goodsno.Goo_Mate,goodsno.goo_name,0.00 as UserPrice,goodsno.Spec,
                             goodsno.Content,goodsno.Goo_unit,goodsno.getdetail_memo,0 as num,0 as piece
                             from goodsno,goodmate,goodtype where 1=1 
-                            and goo_type=typeno and goo_mate=matecode and goodsno.isweb='Y'  and goodtype.isweb='Y' and goodmate.isweb='Y' and goodsno.isweb='Y'";
+                            and goo_type=typeno and goo_mate*=matecode and goodsno.isweb='Y'  and goodtype.isweb='Y' and goodmate.isweb='Y'";
             ls_SQL += WebSet.GetShowGood_SQL("all");
             n_findby_dw lnv_find = new n_findby_dw();
             lnv_find.of_setSQL(ls_SQL);
@@ -64,7 +64,7 @@ namespace WeiXinShop
 
             int count = 0;
             DataTable ldt_Goods = lnv_find.Of_GetPageDataTable("goodsno.goo_code", gi_PageSize, li_PageIndex, ref count);//PageDAL.Page(Page, baseclass.GysoftParameter.ChangeParameter(ll_Pa), out count);
-
+            Log.WriteTextLog("Dw_OrderCarSql", "Log", lnv_find.AllSQL + "  sql=" + ls_SQL, 9);
             if (li_PageIndex == 1)
             {
                 if (count % gi_PageSize != 0)

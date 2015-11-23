@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Dw_OrderCar.aspx.cs" Inherits="WeiXinShop.Dw_OrderCar" %>
+﻿ <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Dw_OrderCar.aspx.cs" Inherits="WeiXinShop.Dw_OrderCar" %>
 <%@ Register TagPrefix="uc1" TagName="WebCtl1" Src="~/Pages.ascx" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -162,7 +162,7 @@
         <div style="position: relative; height: 55px; margin: 10px 0 0 80px">
           <div style="position: absolute; left: 0px; top: 3px">
             <strong><%# SubStr(Eval("goo_name").ToString(),20) %></strong><br />
-            <%# WeiXinShop.Core.Tools.GetGoo_type(Eval("Goo_Type")) %><br />
+            <%# WeiXinShop.Core.Tools.GetGoo_type(Eval("Goo_Type")) %>&nbsp;<%# Eval("Content")%><br />
             <%# WeiXinShop.Core.Tools.GetGoo_mate(Eval("Goo_Mate")) %>&nbsp;<%# Eval("Spec") %>&nbsp;<%# Eval("Goo_unit")%></div>
           <div style="width: 110px; vertical-align: middle; position: absolute; right: 38px; text-align: right; top: 7px">
             <span id="UserPrice<%# Container.ItemIndex + 1 %>"style="font-size: 20px; color: Red; font-family: 黑体">

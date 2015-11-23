@@ -34,9 +34,9 @@ namespace WeiXinShop
                 Tools.WriteLog("error", "login", SqlHelper.ErrStr + "|" + ls_SQL + "|" + SqlHelper.CONN_STR);
                 return;
             }
-            if (!String.IsNullOrEmpty(SqlHelper.ErrStr) || ldt.Rows.Count <= 0)
+            if (ldt.Rows.Count <= 0)
             {
-                ClientScript.RegisterClientScriptBlock(this.GetType(), "asd", "alert('手机号不正确')", true);
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "asd", "alert('手机号不正确,当前手机号：" + HTxt_Mobile.Value + "')", true);
                 return;
             }
             if (!String.IsNullOrEmpty(ldt.Rows[0]["WeixinID"] as String))

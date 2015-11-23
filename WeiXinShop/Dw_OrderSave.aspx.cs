@@ -165,6 +165,13 @@ namespace WeiXinShop
                 Dr["GooMate"] = Mode.Goo_mate;
                 Dr["Getdetail_Memo"] = Mode.Getdetail_Memo;
                 Dr["Goo_price"] = Mode.Goo_price;
+                if (Mode.Goo_price == "")
+                {
+                    Log.WriteTextLog("Dw_OrderSave_Err", "Log", "GoodCode=" + Mode.Goo_code + " Getdetail_Memo=" + Mode.Getdetail_Memo, 3);
+                    ClientScript.RegisterClientScriptBlock(this.GetType(), "",
+                "alert('获取价格失败!订单无法保存');", true);//select  * from dbo.uf_getcussaleprice('GD198','600001','2015-10-10','正常')
+                    return;
+                }
                 ldt_GoodsNo.Rows.Add(Dr);
             }
             ldt_GoodsNo.DefaultView.Sort = "GooType,GooNo";
@@ -256,7 +263,7 @@ namespace WeiXinShop
                 new GysoftParameter("@memo",txt_memo.Text.Trim()),
                 new GysoftParameter("@receiveaddr", Txt_receiveaddr.Text.Trim()),
                 new GysoftParameter("@cusPhone",Txt_Phone.Text),
-                new GysoftParameter("@inputMan",ls_CusName.Trim()),
+                new GysoftParameter("@inputMan",as_Cus_code.Trim()),
                 new GysoftParameter("@agentcus_code",ls_SubCom)};
 
                 SqlHelper.ExecuteNonQuery(ls_Sql, Pa2);

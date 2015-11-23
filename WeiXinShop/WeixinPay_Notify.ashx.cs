@@ -16,7 +16,6 @@ namespace WeiXinShop
     /// </summary>
     public class WeixinPay_Notify : IHttpHandler, IRequiresSessionState
     {
-
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";

@@ -32,7 +32,7 @@ namespace WeiXinShop
         private void SendMessage(HttpContext context)
         {
             string Express_type = context.Request.Form["Express_type"].ToString();
-            string Express_code = context.Request.Form["Express_code"].ToString();//缩略图路径
+            string Express_code = context.Request.Form["Express_code"].ToString();
             string goo_str = context.Request.Form["goo_str"].ToString();
             string ls_num = context.Request.Form["num"].ToString();
             string out_no = context.Request.Form["out_no"].ToString();

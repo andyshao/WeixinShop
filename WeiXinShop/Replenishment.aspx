@@ -173,7 +173,7 @@
         <div style="position: relative; height: 65px; margin: 5px 0 0 80px">
           <div style="position: absolute; left: 0px; top: 0px">
             <strong><%# SubStr(Eval("goo_name").ToString(),20) %></strong>
-            <br /><%# WeiXinShop.Core.Tools.GetGoo_type(Eval("Goo_Type")) %>
+            <br /><%# WeiXinShop.Core.Tools.GetGoo_type(Eval("Goo_Type")) %>&nbsp;<%# Eval("Content")%>
             <br /><%# WeiXinShop.Core.Tools.GetGoo_mate(Eval("Goo_Mate")) %>&nbsp;<%# Eval("Spec") %>&nbsp;<%# Eval("Goo_unit")%>
             <br /><span style="color: #0000CC">最后订货:<%# Eval("lasttime")%></span>
           </div>

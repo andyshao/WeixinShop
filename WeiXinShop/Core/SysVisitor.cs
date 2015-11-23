@@ -68,7 +68,7 @@ namespace WeiXinShop.Core
                 HttpContext.Current.Session["sitefirst"] = value;
             }
         }
-
+        public string DbPwd { set; get; }
         public string ConnSession_key
         {
             get
@@ -318,7 +318,7 @@ namespace WeiXinShop.Core
                 StreamReader Reader = new StreamReader(s, Encoding.UTF8);
                 while ((StrDate = Reader.ReadLine()) != null)
                 {
-                    strValue += StrDate + "\r\n";
+                    strValue += StrDate;
                 }
             }
             return strValue;

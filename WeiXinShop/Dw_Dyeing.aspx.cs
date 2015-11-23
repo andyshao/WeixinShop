@@ -156,7 +156,7 @@ namespace WeiXinShop
             {
                 return false;
             }
-            string ls_sql = "SELECT isnull(goo_TypeName,'')as name FROM goodsno where  goo_type='" + as_goo_type + "' and goo_TypeName='" + as_id + "' and goo_mate='PR' and isnull(visible,'Y')<>'N'";
+            string ls_sql = "SELECT isnull(goo_TypeName,'')as name FROM goodsno where  goo_type='" + as_goo_type + "' and goo_TypeName='" + as_id + "' and isnull(goo_mate,'')='PR' and isnull(visible,'Y')<>'N'";
             string ls_name = "";
             ls_name = SqlHelper.ExecuteScalar(ls_sql);
             if (ls_name != "")
@@ -177,7 +177,7 @@ namespace WeiXinShop
             {
                 return "";
             }
-            string ls_sql = @"SELECT goo_code FROM goodsno where goo_type='" + as_goo_type + "' and goo_mate='PR' and goo_TypeName='" + as_id + "' and isnull(visible,'Y')<>'N'";
+            string ls_sql = @"SELECT goo_code FROM goodsno where goo_type='" + as_goo_type + "' and isnull(goo_mate,'')='PR' and goo_TypeName='" + as_id + "' and isnull(visible,'Y')<>'N'";
             string ls_code = "";
             ls_code = SqlHelper.ExecuteScalar(ls_sql);
             if (ls_code != "")
